@@ -1,0 +1,15 @@
+﻿# Width and height of the World
+world_width: 20
+world_height: 20
+
+# Percentage of plants in the World
+percentage: 0
+
+# Growth every x frames
+growth: 30
+# How many %?
+growth-percentage: 0
+
+# Is there solid border or world is sphere
+# true - solid, false - sphere
+border: true
