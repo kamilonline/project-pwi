@@ -1,7 +1,7 @@
 import json
 
 
-class Config:
+class WorldConfig:
     def __init__(self):
 
         with open("config/world-config.json", encoding="utf-8-sig") as file:
