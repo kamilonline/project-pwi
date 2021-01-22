@@ -9,5 +9,5 @@ class WorldConfig:
             self.world_width = config_dict["world_width"]
             self.world_height = config_dict["world_height"]
             self.plant_growth = config_dict["growth"]
-            self.growth_percentage = config_dict["growth-percentage"]
+            self.plant_percentage = config_dict["plant-percentage"]
             self.border = config_dict["border"]

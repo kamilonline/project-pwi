@@ -1,8 +1,7 @@
 ﻿{
 	"world_width": 20,
 	"world_height": 20,
-	"percentage": 0,
 	"growth": 30,
-	"growth-percentage": 0,
+	"plant-percentage": 0,
 	"border": true
 }
