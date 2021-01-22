@@ -16,5 +16,5 @@ class PlantConfig:
         with open("config/plant-config.json", encoding="utf-8-sig") as file:
             config_dict = json.load(file)
             self.plant_growth = config_dict["growth"]
-            self.plant_percentage = config_dict["plant-percentage"]
+            self.plant_percentage = config_dict["plant_percentage"]
             self.plant_energy = config_dict["energy"]
