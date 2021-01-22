@@ -4,7 +4,7 @@ from plant import Plant
 
 
 class World:
-    def __init__(self, seed: int, world_config: WorldConfig, plant_config: PlantConfig):
+    def __init__(self, seed: int, world_config: WorldConfig, plant_config: PlantConfig, organism_config: OrganismConfig):
         random.seed(seed)
         self.width = world_config.world_width
         self.height = world_config.world_height
