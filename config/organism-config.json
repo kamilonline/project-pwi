@@ -1,0 +1,15 @@
+{
+    "organism-percentage": 0.2,
+    "sight-distance": 10,
+    "speed": 0.1,
+    "mutation-probability": 0.05,
+    "energy-threshold": 100,
+    "time-threshold": 100,
+    "probability": 0.2,
+    "energy-capacity": 100,
+    "eating-threshold": 0.2,
+    "budding-loss": 20,
+    "walking-loss": 10,
+    "stationary-loss": 2,
+    "eating-loss": 0
+}
