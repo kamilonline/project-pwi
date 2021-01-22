@@ -4,6 +4,7 @@ from plant import Plant
 
 class World:
     def __init__(self, seed: int, config):
+        random.seed(seed)
         self.width = config.world_width
         self.height = config.world_height
         self.fields = [[list() for _ in range(self.width)] for _ in range(self.height)]
