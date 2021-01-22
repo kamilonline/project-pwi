@@ -13,10 +13,14 @@ class World:
 
         # generating random coords for plants
         coords = [(i, j) for i in range(self.height) for j in range(self.width)]
-        k = (plant_config.plant_percentage * self.width * self.height) // 100
+        k = int(plant_config.plant_percentage * self.width * self.height) 
         plant_coords = random.sample(coords, k)
 
         # adding plant instances to coresponding fields
         for coords in plant_coords:
             self.fields[coords[0]][coords[1]].append(Plant(list(coords)))
+
+        
+
+        
 
