@@ -23,17 +23,17 @@ class PlantConfig:
 class OrganismConfig:
     def __init__(self):
         with open("config/organism-config.json", encoding="utf-8-sig") as file:
-            confid_dict = json.load(file)
-            self.organism_percentage = confid_dict["organism_percentage"]
-            self.sight_distance = confid_dict["sight_distance"]
-            self.speed = confid_dict["speed"]
-            self.mutation_probability = confid_dict["mutation_probability"]
-            self.energy_threshold = confid_dict["energy_threshold"]
-            self.time_threshold = confid_dict["time_threshold"]
-            self.probability = confid_dict["probability"]
-            self.energy_capacity = confid_dict["energy_capacity"]
-            self.eating_threshold = confid_dict["eating_threshold"]
-            self.budding_loss = confid_dict["budding_loss"]
-            self.walking_loss = confid_dict["walking_loss"]
-            self.stationary_loss = confid_dict["stationary_loss"]
-            self.eating_loss = confid_dict["eating_loss"]
+            config_dict = json.load(file)
+            self.organism_percentage = config_dict["organism_percentage"]
+            self.sight_distance = config_dict["sight_distance"]
+            self.speed = config_dict["speed"]
+            self.mutation_probability = config_dict["mutation_probability"]
+            self.energy_threshold = config_dict["energy_threshold"]
+            self.time_threshold = config_dict["time_threshold"]
+            self.probability = config_dict["probability"]
+            self.energy_capacity = config_dict["energy_capacity"]
+            self.eating_threshold = config_dict["eating_threshold"]
+            self.budding_loss = config_dict["budding_loss"]
+            self.walking_loss = config_dict["walking_loss"]
+            self.stationary_loss = config_dict["stationary_loss"]
+            self.eating_loss = config_dict["eating_loss"]
