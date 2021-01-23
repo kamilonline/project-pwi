@@ -25,6 +25,9 @@ class World:
         k = int(organism_config.organism_percentage * self.width * self.height)
         organisms_coords = random.sample(coords, k)
 
+        # set values from config to class attributes
+        Organism.initialize_class_atributes(organism_config)
+
         # adding organism instances to corresponding fields
         for coords in organisms_coords:
             organism = Organism(organism_config.sight_distance,
