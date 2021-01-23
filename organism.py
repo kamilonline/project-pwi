@@ -19,12 +19,12 @@ class Organism:
 
     @classmethod
     def initialize_class_atributes(cls, organism_config: OrganismConfig):
-        Organism.mutation_probability = organism_config.mutation_probability
-        Organism.budding_energy_threshold = organism_config.budding_energy_threshold
-        Organism.budding_time_threshold = organism_config.budding_time_threshold
-        Organism.budding_probability = organism_config.budding_probability
-        Organism.eating_threshold = organism_config.eating_threshold
-        Organism.budding_loss = organism_config.budding_loss
-        Organism.walking_loss = organism_config.walking_loss
-        Organism.stationary_loss = organism_config.stationary_loss
-        Organism.eating_loss = organism_config.eating_loss
+        cls.mutation_probability = organism_config.mutation_probability
+        cls.budding_energy_threshold = organism_config.budding_energy_threshold
+        cls.budding_time_threshold = organism_config.budding_time_threshold
+        cls.budding_probability = organism_config.budding_probability
+        cls.eating_threshold = organism_config.eating_threshold
+        cls.budding_loss = organism_config.budding_loss
+        cls.walking_loss = organism_config.walking_loss
+        cls.stationary_loss = organism_config.stationary_loss
+        cls.eating_loss = organism_config.eating_loss
