@@ -1,7 +1,7 @@
 import random
-from Config import *
+from config import *
 from plant import Plant
-from Organism import Organism
+from organism import Organism
 
 
 class World:
