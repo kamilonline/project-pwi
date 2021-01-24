@@ -115,3 +115,9 @@ class Organism:
                                 minimum_distance = distance
                                 min_coords = (field_x, field_y)
         return Direction.generate_direction(self.coords, min_coords)
+
+    def move(self, direction: Direction, world_height: int, world_width: int):
+
+        self.coords[0] = max(0, min(world_height, self.coords[0] + direction.value[0]))
+
+        self.coords[1] = max(0, min(world_width, self.coords[1] + direction.value[1]))
