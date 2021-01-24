@@ -12,10 +12,10 @@ class Organism:
     stationary_loss = 0
     eating_loss = 0
 
-    def __init__(self, sight_distance, speed, energy_capacity):
-        self.sight_distance = sight_distance
-        self.speed = speed
-        self.energy_capacity = energy_capacity
+    def __init__(self, *args):
+        self.sight_distance = args[0]
+        self.speed = args[1]
+        self.energy_capacity = args[2]
 
     @classmethod
     def initialize_class_atributes(cls, organism_config: OrganismConfig):
