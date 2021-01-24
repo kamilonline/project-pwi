@@ -1,6 +1,7 @@
 import random
 from config import OrganismConfig
 from plant import *
+from direction import *
 
 
 class Organism:
@@ -113,4 +114,4 @@ class Organism:
                             if distance < minimum_distance:
                                 minimum_distance = distance
                                 min_coords = (field_x, field_y)
-        return min_coords
+        return Direction.generate_direction(self.coords, min_coords)
