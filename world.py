@@ -1,6 +1,5 @@
 import random
 from config import WorldConfig
-from plant import *
 from organism import *
 
 
@@ -30,10 +29,10 @@ class World:
 
         # adding organism instances to corresponding fields
         for coords_iter in organisms_coords:
-            organism = Organism(organism_config.sight_distance,
+            organism = Organism(list(coords_iter),
+                                organism_config.sight_distance,
                                 organism_config.speed,
                                 organism_config.energy_capacity
                                 )
 
             self.fields[coords_iter[0]][coords_iter[1]].append(organism)
-

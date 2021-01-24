@@ -1,5 +1,6 @@
 import random
 from config import OrganismConfig
+from plant import *
 
 
 class Organism:
@@ -21,10 +22,10 @@ class Organism:
                 collection = list(collection.values())
         else:
             collection = args
-
-        self.sight_distance = collection[0]
-        self.speed = collection[1]
-        self.energy_capacity = collection[2]
+        self.coords = collection[0]
+        self.sight_distance = collection[1]
+        self.speed = collection[2]
+        self.energy_capacity = collection[3]
 
     @classmethod
     def initialize_class_atributes(cls, organism_config: OrganismConfig):
@@ -80,3 +81,36 @@ class Organism:
         attributes[trait_to_mutate] = mutated_trait
 
         return attributes
+
+    def check_distance(self, x, y):
+        distance = abs(self.coords[0] - x) + abs(self.coords[1] - y)
+        return distance
+
+    def search_fields(self, fields):
+        minimum_distance = self.sight_distance
+        min_coords = ()
+        world_height = len(fields)
+        world_width = len(fields[0])
+
+        for x in range(-self.sight_distance, self.sight_distance + 1):
+            field_x = self.coords[0] + x
+            if field_x > world_height - 1 or field_x < 0:
+                continue
+
+            for y in range(-self.sight_distance, self.sight_distance + 1):
+                field_y = self.coords[1] + y
+                if field_y > world_width - 1 or field_y < 0:
+                    continue
+                
+                # checking if there is a plant on a current field
+                seen_field = fields[field_x][field_y]
+                if seen_field:
+                    for element in seen_field:
+                        if isinstance(element, Plant):
+
+                            # looking for a nearest plant
+                            distance = self.check_distance(field_x, field_y)
+                            if distance < minimum_distance:
+                                minimum_distance = distance
+                                min_coords = (field_x, field_y)
+        return min_coords
