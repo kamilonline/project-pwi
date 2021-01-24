@@ -18,8 +18,8 @@ class World:
         plant_coords = random.sample(coords, k)
 
         # adding plant instances to corresponding fields
-        for coords in plant_coords:
-            self.fields[coords[0]][coords[1]].append(Plant(list(coords)))
+        for coords_iter in plant_coords:
+            self.fields[coords_iter[0]][coords_iter[1]].append(Plant(list(coords_iter)))
 
         # generating random coords for organisms
         k = int(organism_config.organism_percentage * self.width * self.height)
@@ -29,10 +29,11 @@ class World:
         Organism.initialize_class_atributes(organism_config)
 
         # adding organism instances to corresponding fields
-        for coords in organisms_coords:
+        for coords_iter in organisms_coords:
             organism = Organism(organism_config.sight_distance,
                                 organism_config.speed,
                                 organism_config.energy_capacity
                                 )
 
-            self.fields[coords[0]][coords[1]].append(organism)
+            self.fields[coords_iter[0]][coords_iter[1]].append(organism)
+
