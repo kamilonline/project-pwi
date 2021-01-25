@@ -56,20 +56,113 @@ class App:
         self.manager,
         container = self.settings)
 
-        self.test_slider = pygame_gui.elements.UIHorizontalSlider(pygame.Rect((int(self.options.resolution[0] / 2),
-                                                            int(self.options.resolution[1] * 0.70)),
-                                                            (240, 25)),
-                                                            50.0,
-                                                            (0.0, 100.0),
-                                                            self.manager,
-                                                            container=self.settings)
 
-        self.slider_label = pygame_gui.elements.UILabel(pygame.Rect((int(self.options.resolution[0] / 2) + 250,
-                                                int(self.options.resolution[1] * 0.70)),
-                                                (27, 25)),
-                                                str(int(self.test_slider.get_current_value())),
-                                                self.manager,
-                                                container=self.settings)
+        world_width_cords = (self.options.resolution[0] * 0.05, self.options.resolution[1] * 0.05)
+
+        self.world_width = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(world_width_cords,(240, 25)),
+        50.0,
+        (0.0, 100.0),
+        self.manager,
+        container=self.settings)   
+
+        self.world_width_number = pygame_gui.elements.UILabel(pygame.Rect((world_width_cords[0] + 250, world_width_cords[1]), (27, 25)),
+        str(int(self.world_width.get_current_value())),
+        self.manager,
+        container=self.settings)
+
+        self.world_width_label = pygame_gui.elements.UILabel(pygame.Rect(world_width_cords[0], world_width_cords[1] - 15,
+        240, 15),
+        "World width",
+        self.manager,
+        container=self.settings)
+
+
+        world_height_cords = (world_width_cords[0], world_width_cords[1] + 50)
+
+        self.world_height = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(world_height_cords,(240, 25)),
+        50.0,
+        (0.0, 100.0),
+        self.manager,
+        container=self.settings)   
+
+        self.world_height_number = pygame_gui.elements.UILabel(pygame.Rect((world_height_cords[0] + 250, world_height_cords[1]), (27, 25)),
+        str(int(self.world_height.get_current_value())),
+        self.manager,
+        container=self.settings)
+
+        self.world_height_label = pygame_gui.elements.UILabel(pygame.Rect(world_height_cords[0], world_height_cords[1] - 15,
+        240, 15),
+        "World height",
+        self.manager,
+        container=self.settings)
+
+
+        world_border_cords = (world_width_cords[0], world_width_cords[1] + 100)
+
+        self.world_border = pygame_gui.elements.UIButton(pygame.Rect(world_border_cords,
+        (60, 30)),
+        '',
+        self.manager,
+        container = self.settings)
+
+        self.world_border_label = pygame_gui.elements.UILabel(pygame.Rect(world_border_cords[0] + 70, world_border_cords[1] + 7.5,
+        110, 15),
+        "World border",
+        self.manager,
+        container=self.settings)
+
+
+        plant_percentage_cords = (world_border_cords[0], world_border_cords[1] + 100)
+
+        self.plant_percentage = pygame_gui.elements.UITextEntryLine(pygame.Rect(plant_percentage_cords,
+        (60,100)),
+        self.manager,
+        container = self.settings,
+        object_id = '#float')
+        self.plant_percentage.set_allowed_characters(['0','1','2','3','4','5','6','7','8','9','.'])
+        self.plant_percentage.set_text_length_limit(5)
+
+        self.plant_percentage_label = pygame_gui.elements.UILabel(pygame.Rect(plant_percentage_cords[0] + 70, plant_percentage_cords[1] + 7.5,
+        130, 15),
+        "Plant percentage",
+        self.manager,
+        container=self.settings)
+
+
+        plant_growth_cords = (plant_percentage_cords[0], plant_percentage_cords[1] + 30)       
+
+        self.plant_growth = pygame_gui.elements.UITextEntryLine(pygame.Rect(plant_growth_cords,
+        (60,100)),
+        self.manager,
+        container = self.settings,
+        object_id = '#int')
+        self.plant_growth.set_allowed_characters(['0','1','2','3','4','5','6','7','8','9'])
+
+        self.plant_growth_label = pygame_gui.elements.UILabel(pygame.Rect(plant_growth_cords[0] + 70, plant_growth_cords[1] + 7.5,
+        170, 15),
+        "Plant growth (frames)",
+        self.manager,
+        container=self.settings)
+
+
+        plant_energy_cords = (plant_growth_cords[0], plant_growth_cords[1] + 60)   
+
+        self.plant_energy = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(plant_energy_cords,(240, 25)),
+        50.0,
+        (0.0, 255.0),
+        self.manager,
+        container=self.settings)   
+
+        self.plant_energy_number = pygame_gui.elements.UILabel(pygame.Rect((plant_energy_cords[0] + 250, plant_energy_cords[1]), (27, 25)),
+        str(int(self.world_height.get_current_value())),
+        self.manager,
+        container=self.settings)
+
+        self.plant_energy_label = pygame_gui.elements.UILabel(pygame.Rect(plant_energy_cords[0], plant_energy_cords[1] - 15,
+        240, 15),
+        "Initial plant energy",
+        self.manager,
+        container=self.settings)
 
 
     def events(self):
@@ -86,12 +179,36 @@ class App:
                     if event.ui_element == self.settings_button:
                         self.manager.root_container.hide()
                         self.settings.show()
-
-                    
+                        self.settings.visible = True                    
 
                     if event.ui_element == self.close_settings_button:
                         self.manager.root_container.show()
                         self.settings.hide()
+                        self.settings.visible = False
+                        
+                    if event.ui_element == self.world_border:
+                        if event.ui_element.is_selected: 
+                            event.ui_element.unselect()
+                            self.world_border.set_text("False")
+                        else: 
+                            event.ui_element.select()
+                            self.world_border.set_text("True")
+            
+
+                if event.user_type == pygame_gui.UI_TEXT_ENTRY_CHANGED:
+                    if event.ui_object_id == 'panel.#float':
+                        if event.ui_element.get_text() == '.' or event.ui_element.get_text() == '': continue
+                        try:
+                            temp = float(event.ui_element.get_text())
+                            if temp > 1: event.ui_element.set_text('1')
+                        except: event.ui_element.set_text('0') 
+
+
+    def sliders(self):
+        if self.settings.visible:
+            if self.world_width.has_moved_recently: self.world_width_number.set_text(str(int(self.world_width.get_current_value())))
+            if self.world_height.has_moved_recently: self.world_height_number.set_text(str(int(self.world_height.get_current_value())))
+            if self.plant_energy.has_moved_recently: self.plant_energy_number.set_text(str(int(self.plant_energy.get_current_value())))
 
 
     def run(self):
@@ -101,13 +218,13 @@ class App:
             self.events()
             self.manager.update(time_delta)
 
-            if self.test_slider.has_moved_recently:
-                self.slider_label.set_text(str(int(self.test_slider.get_current_value())))
+            self.sliders()
 
             self.window_surface.blit(self.background, (0, 0))
             self.manager.draw_ui(self.window_surface)
             pygame.display.update()
         
+
 
 if __name__ == '__main__':
     app = App()
