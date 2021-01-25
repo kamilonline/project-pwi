@@ -7,8 +7,7 @@ class Plant(Entity):
     energy = 0
 
     def __init__(self, generation: int, id: int, coords: list):
-        super().__init__(generation, id)
-        self.position = coords
+        super().__init__(generation, id, coords)
 
     @classmethod
     def initialize_class_atributes(cls, plant_config: PlantConfig):

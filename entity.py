@@ -1,5 +1,5 @@
 class Entity:
-    def __init__(self, generation: int, id: int):
+    def __init__(self, generation: int, id: int, coords: list):
         self.generation = generation
         self.id = id
-    # todo: implement death without deleting ids from world dictionaries
+        self.coords = coords

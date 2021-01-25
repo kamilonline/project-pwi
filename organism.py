@@ -24,9 +24,8 @@ class Organism(Entity):
         else:
             collection = args
 
-        super().__init__(collection[0], collection[1])
+        super().__init__(collection[0], collection[1], collection[2])
 
-        self.coords = collection[2]
         self.sight_distance = collection[3]
         self.speed = collection[4]
         self.energy_capacity = collection[5]
