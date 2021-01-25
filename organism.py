@@ -45,14 +45,23 @@ class Organism(Entity):
         cls.stationary_loss = organism_config.stationary_loss
         cls.eating_loss = organism_config.eating_loss
 
-    def reproduce(self):
+    def reproduce(self, organisms: dict):
         """
         creates copy of organism and mutates it according to parameters
         :return: instance of Organism class
         """
         attributes = vars(self).copy()
         attributes["generation"] += 1
-        # todo: add id handling
+        new_generation = attributes["generation"]
+
+        # prepare a place in organisms nested dictionary in World class
+        if new_generation in organisms and organisms[new_generation]:
+            attributes["id"] = list(organisms[new_generation].keys())[-1] + 1
+        else:
+            attributes["id"] = 0
+            if new_generation not in organisms:
+                organisms[new_generation] = {}
+
         if random.random() < Organism.mutation_probability:
             # create new mutated atributes
             attributes = list(self.__mutate_attributes(attributes).values())
