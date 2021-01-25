@@ -12,8 +12,8 @@ class World:
         self.fields = [[list() for _ in range(self.width)] for _ in range(self.height)]
 
         # {generation index : {id: entitiy instance}}
-        self.plants = dict()
-        self.organisms = dict()
+        self.plants = {0: {}}
+        self.organisms = {0: {}}
         self.growth_rate = plant_config.plant_growth
 
         # list of all possible coords
