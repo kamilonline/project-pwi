@@ -1,11 +1,13 @@
 from config import PlantConfig
+from entity import Entity
 
 
-class Plant:
+class Plant(Entity):
     growth = 0
     energy = 0
 
-    def __init__(self, coords: list):
+    def __init__(self, generation: int, id: int, coords: list):
+        super().__init__(generation, id)
         self.position = coords
 
     @classmethod

@@ -4,7 +4,7 @@ from plant import *
 from direction import *
 
 
-class Organism:
+class Organism(Entity):
     traits_names = ("sight_distance", "speed", "energy_capacity")
     mutation_probability = 0
     budding_energy_threshold = 0
@@ -23,10 +23,13 @@ class Organism:
                 collection = list(collection.values())
         else:
             collection = args
-        self.coords = collection[0]
-        self.sight_distance = collection[1]
-        self.speed = collection[2]
-        self.energy_capacity = collection[3]
+
+        super().__init__(collection[0], collection[1])
+
+        self.coords = collection[2]
+        self.sight_distance = collection[3]
+        self.speed = collection[4]
+        self.energy_capacity = collection[5]
 
     @classmethod
     def initialize_class_atributes(cls, organism_config: OrganismConfig):
@@ -46,6 +49,8 @@ class Organism:
         :return: instance of Organism class
         """
         attributes = vars(self).copy()
+        attributes["generation"] += 1
+        # todo: add id handling
         if random.random() < Organism.mutation_probability:
             # create new mutated atributes
             attributes = list(self.__mutate_attributes(attributes).values())
