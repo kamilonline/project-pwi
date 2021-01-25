@@ -31,6 +31,7 @@ class Organism(Entity):
         self.energy_capacity = collection[5]
 
         self.energy = self.energy_capacity
+        self.orientation = Direction(random.choice([i.value for i in Direction]))
 
     @classmethod
     def initialize_class_atributes(cls, organism_config: OrganismConfig):
