@@ -31,6 +31,8 @@ class Organism(Entity):
         self.speed = collection[4]
         self.energy_capacity = collection[5]
 
+        self.energy = self.energy_capacity
+
     @classmethod
     def initialize_class_atributes(cls, organism_config: OrganismConfig):
         cls.mutation_probability = organism_config.mutation_probability
@@ -126,3 +128,7 @@ class Organism(Entity):
         self.coords[0] = max(0, min(world_height, self.coords[0] + direction.value[0]))
 
         self.coords[1] = max(0, min(world_width, self.coords[1] + direction.value[1]))
+
+    def eat(self, element):
+        self.energy = min(element.energy + self.energy, self.energy_capacity)
+        
