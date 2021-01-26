@@ -193,6 +193,30 @@ class App:
         self.mut_probability.set_allowed_characters(['0','1','2','3','4','5','6','7','8','9','.'])
         self.mut_probability.set_text_length_limit(5)
         self.mut_probability_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 80, cords[1] + 7.5,  160, 15),  "Mutation probability",self.manager,   container=self.settings)
+        
+        
+        cords = (cords[0], cords[1] + 70)
+        self.budding_energy_treshold = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords,(240, 25)), 50.0, (0.0, 100.0), self.manager, container=self.settings)   
+        self.budding_energy_treshold_number = pygame_gui.elements.UILabel(pygame.Rect((cords[0] + 250, cords[1]), (27, 25)), str(int(self.budding_energy_treshold.get_current_value())), self.manager,  container=self.settings)
+        self.budding_energy_treshold_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15), "Budding energy treshold",  self.manager,   container=self.settings)
+
+        cords = (cords[0], cords[1] + 40)       
+        self.budding_time_treshold = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords,  (60,100)), self.manager,  container = self.settings)
+        self.budding_time_treshold.set_allowed_characters(['0','1','2','3','4','5','6','7','8','9'])
+        self.budding_time_treshold.set_text_length_limit(5)
+        self.budding_time_treshold_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 70, cords[1] + 7.5,  190, 15),  "Budding time treshold",self.manager,   container=self.settings)
+
+        cords = (cords[0], cords[1] + 40)       
+        self.budding_probability = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords,  (60,100)), self.manager, object_id = '#float', container = self.settings)
+        self.budding_probability.set_allowed_characters(['0','1','2','3','4','5','6','7','8','9','.'])
+        self.budding_probability.set_text_length_limit(5)
+        self.budding_probability_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 80, cords[1] + 7.5, 160, 15),  "Budding probability",self.manager,   container=self.settings)
+
+        
+        
+        
+        
+      
 
 
 
@@ -240,6 +264,8 @@ class App:
             if self.world_width.has_moved_recently: self.world_width_number.set_text(str(int(self.world_width.get_current_value())))
             if self.world_height.has_moved_recently: self.world_height_number.set_text(str(int(self.world_height.get_current_value())))
             if self.plant_energy.has_moved_recently: self.plant_energy_number.set_text(str(int(self.plant_energy.get_current_value())))
+            
+            if self.budding_energy_treshold.has_moved_recently: self.budding_energy_treshold_number.set_text(str(int(self.budding_energy_treshold.get_current_value())))
 
 
     def run(self):
