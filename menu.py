@@ -50,7 +50,7 @@ class App:
 
 
     def ui_settings(self):
-        self.close_settings_button = pygame_gui.elements.UIButton(pygame.Rect(((self.options.resolution[0]-165) / 2, (self.options.resolution[1]-100)),
+        self.close_settings_button = pygame_gui.elements.UIButton(pygame.Rect(((self.options.resolution[0]*0.05), (self.options.resolution[1]-100)),
         (165, 50)),
         'Close',
         self.manager,
@@ -188,14 +188,14 @@ class App:
         self.speed.set_text_length_limit(5)
         self.speed_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 60, cords[1] + 7.5,    80, 15),  "Speed",self.manager,   container=self.settings)
 
-        cords = (cords[0], cords[1] + 60)       
+        cords = (cords[0], cords[1] + 40)       
         self.mut_probability = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords,  (60,100)), self.manager, object_id = '#float', container = self.settings)
         self.mut_probability.set_allowed_characters(['0','1','2','3','4','5','6','7','8','9','.'])
         self.mut_probability.set_text_length_limit(5)
         self.mut_probability_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 80, cords[1] + 7.5,  160, 15),  "Mutation probability",self.manager,   container=self.settings)
         
         
-        cords = (cords[0], cords[1] + 70)
+        cords = (cords[0], cords[1] + 55)
         self.budding_energy_treshold = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords,(240, 25)), 50.0, (0.0, 100.0), self.manager, container=self.settings)   
         self.budding_energy_treshold_number = pygame_gui.elements.UILabel(pygame.Rect((cords[0] + 250, cords[1]), (27, 25)), str(int(self.budding_energy_treshold.get_current_value())), self.manager,  container=self.settings)
         self.budding_energy_treshold_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15), "Budding energy treshold",  self.manager,   container=self.settings)
