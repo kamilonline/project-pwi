@@ -50,6 +50,12 @@ class Organism(Entity):
         creates copy of organism and mutates it according to parameters
         :return: instance of Organism class
         """
+
+        self.energy -= Organism.budding_loss
+        if self.energy < 0:
+            self.energy = 0
+            return
+
         attributes = vars(self).copy()
         attributes["generation"] += 1
         new_generation = attributes["generation"]
@@ -133,11 +139,18 @@ class Organism(Entity):
         return Direction.generate_direction(self.coords, min_coords)
 
     def move(self, direction: Direction, world_height: int, world_width: int):
+        self.energy -= Organism.walking_loss
+        if self.energy < 0:
+            self.energy = 0
+            return
 
         self.coords[0] = max(0, min(world_height, self.coords[0] + direction.value[0]))
 
         self.coords[1] = max(0, min(world_width, self.coords[1] + direction.value[1]))
 
     def eat(self, element):
-        self.energy = min(element.energy + self.energy, self.energy_capacity)
-        
+        self.energy += element.energy
+        self.energy -= Organism.eating_loss
+        if self.energy < 0:
+            self.energy = 0
+
