@@ -1,5 +1,5 @@
 ﻿{
 	"world_width": 20,
 	"world_height": 20,
-	"border": true
+	"seed": 1
 }

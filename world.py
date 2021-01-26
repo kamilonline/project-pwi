@@ -4,8 +4,8 @@ from organism import *
 
 
 class World:
-    def __init__(self, seed: int, world_config: WorldConfig, plant_config: PlantConfig, organism_config: OrganismConfig):
-        random.seed(seed)
+    def __init__(self, world_config: WorldConfig, plant_config: PlantConfig, organism_config: OrganismConfig):
+        random.seed(world_config.seed)
         self.width = world_config.world_width
         self.height = world_config.world_height
         self.fields = [[list() for _ in range(self.width)] for _ in range(self.height)]

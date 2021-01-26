@@ -8,7 +8,7 @@ class WorldConfig:
             config_dict = json.load(file)
             self.world_width = config_dict["world_width"]
             self.world_height = config_dict["world_height"]
-            self.border = config_dict["border"]
+            self.seed = config_dict["seed"]
 
 
 class PlantConfig:
