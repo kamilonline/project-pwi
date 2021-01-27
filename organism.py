@@ -105,7 +105,7 @@ class Organism(Entity):
 
         return attributes
 
-    def check_distance(self, x, y):
+    def __check_distance(self, x, y):
         distance = abs(self.coords[0] - x) + abs(self.coords[1] - y)
         return distance
 
@@ -132,7 +132,7 @@ class Organism(Entity):
                         if isinstance(element, Plant):
 
                             # looking for a nearest plant
-                            distance = self.check_distance(field_x, field_y)
+                            distance = self.__check_distance(field_x, field_y)
                             if distance < minimum_distance:
                                 minimum_distance = distance
                                 min_coords = (field_x, field_y)
