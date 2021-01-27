@@ -277,10 +277,25 @@ class MainMenu(Scene):
 
     def update_sliders_text(self):
         if self.settings.visible:
-            if self.world_width.has_moved_recently: self.world_width_number.set_text(str(int(self.world_width.get_current_value())))
-            if self.world_height.has_moved_recently: self.world_height_number.set_text(str(int(self.world_height.get_current_value())))
-            if self.plant_energy.has_moved_recently: self.plant_energy_number.set_text(str(int(self.plant_energy.get_current_value())))
+            if self.world_width.has_moved_recently: self.world_width_number.set_text(
+                str(int(self.world_width.get_current_value())))
+            if self.world_height.has_moved_recently: self.world_height_number.set_text(
+                str(int(self.world_height.get_current_value())))
+            if self.plant_energy.has_moved_recently: self.plant_energy_number.set_text(
+                str(int(self.plant_energy.get_current_value())))
 
+            if self.budding_energy_treshold.has_moved_recently: self.budding_energy_treshold_number.set_text(
+                str(int(self.budding_energy_treshold.get_current_value())))
+            if self.initial_energy_capacity.has_moved_recently: self.initial_energy_capacity_number.set_text(
+                str(int(self.initial_energy_capacity.get_current_value())))
+            if self.budding_energy_loss.has_moved_recently: self.budding_energy_loss_number.set_text(
+                str(int(self.budding_energy_loss.get_current_value())))
+            if self.walking_energy_loss.has_moved_recently: self.walking_energy_loss_number.set_text(
+                str(int(self.walking_energy_loss.get_current_value())))
+            if self.stationary_energy_loss.has_moved_recently: self.stationary_energy_loss_number.set_text(
+                str(int(self.stationary_energy_loss.get_current_value())))
+            if self.eating_energy_loss.has_moved_recently: self.eating_energy_loss_number.set_text(
+                str(int(self.eating_energy_loss.get_current_value())))
     def process_events(self, events):
         for event in events:
 
