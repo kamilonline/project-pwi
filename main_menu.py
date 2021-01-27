@@ -93,18 +93,7 @@ class MainMenu(Scene):
 
         world_border_cords = (world_width_cords[0], world_width_cords[1] + 100)
 
-        self.world_border = pygame_gui.elements.UIButton(pygame.Rect(world_border_cords,
-                                                                     (60, 30)),
-                                                         '',
-                                                         self.manager,
-                                                         container=self.settings)
-
-        self.world_border_label = pygame_gui.elements.UILabel(
-            pygame.Rect(world_border_cords[0] + 70, world_border_cords[1] + 7.5,
-                        110, 15),
-            "World border",
-            self.manager,
-            container=self.settings)
+        # todo: move elements to fill empty space left after deleting world border check box
 
         plant_percentage_cords = (world_border_cords[0], world_border_cords[1] + 100)
 
@@ -316,13 +305,6 @@ class MainMenu(Scene):
                         self.settings.hide()
                         self.settings.visible = False
 
-                    if event.ui_element == self.world_border:
-                        if event.ui_element.is_selected:
-                            event.ui_element.unselect()
-                            self.world_border.set_text("False")
-                        else:
-                            event.ui_element.select()
-                            self.world_border.set_text("True")
 
                 if event.user_type == pygame_gui.UI_TEXT_ENTRY_CHANGED:
                     if event.ui_object_id == 'panel.#float':
