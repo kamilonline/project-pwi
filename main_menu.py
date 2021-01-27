@@ -58,7 +58,7 @@ class MainMenu(Scene):
         world_width_cords = (pygame.display.get_window_size()[0] * 0.05, pygame.display.get_window_size()[1] * 0.05)
 
         self.world_width = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(world_width_cords, (240, 25)),
-                                                                  50.0,
+                                                                 self.world_width,
                                                                   (0.0, 100.0),
                                                                   self.manager,
                                                                   container=self.settings)
@@ -79,7 +79,7 @@ class MainMenu(Scene):
         world_height_cords = (world_width_cords[0], world_width_cords[1] + 50)
 
         self.world_height = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(world_height_cords, (240, 25)),
-                                                                   50.0,
+                                                                   self.world_height,
                                                                    (0.0, 100.0),
                                                                    self.manager,
                                                                    container=self.settings)
@@ -103,6 +103,7 @@ class MainMenu(Scene):
                                                          object_id='#int', container=self.settings)
         self.seed.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
         self.seed.set_text_length_limit(11)
+        self.seed.set_text(str(self.world_config_dict["seed"]))
         self.seed_label = pygame_gui.elements.UILabel(pygame.Rect(world_seed_cords[0] + 100, world_seed_cords[1] + 7.5, 80, 15), "Seed",
                                                        self.manager, container=self.settings)
 
@@ -111,11 +112,11 @@ class MainMenu(Scene):
         self.plant_percentage = pygame_gui.elements.UITextEntryLine(pygame.Rect(plant_percentage_cords,
                                                                                 (60, 100)),
                                                                     self.manager,
-                                                                    container=self.settings,
+                                                                    container=+self.settings,
                                                                     object_id='#float')
         self.plant_percentage.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
         self.plant_percentage.set_text_length_limit(5)
-
+        self.plant_percentage.set_text(str(self.plant_config_dict["plant_percentage"]))
         self.plant_percentage_label = pygame_gui.elements.UILabel(
             pygame.Rect(plant_percentage_cords[0] + 70, plant_percentage_cords[1] + 7.5,
                         130, 15),
@@ -178,6 +179,7 @@ class MainMenu(Scene):
                                                                   object_id='#int', container=self.settings, )
         self.sight_distance.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
         self.sight_distance.set_text_length_limit(5)
+        self.sight_distance.set_text(str(self.organism_config_dict["sight_distance"]))
         self.sight_distance_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 60, cords[1] + 7.5, 150, 15),
                                                                 "Sight distance", self.manager, container=self.settings)
 
@@ -186,6 +188,7 @@ class MainMenu(Scene):
                                                          object_id='#int', container=self.settings)
         self.speed.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
         self.speed.set_text_length_limit(5)
+        self.speed.set_text(str(self.organism_config_dict["speed"]))
         self.speed_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 60, cords[1] + 7.5, 80, 15), "Speed",
                                                        self.manager, container=self.settings)
 
@@ -194,6 +197,7 @@ class MainMenu(Scene):
                                                                    object_id='#float', container=self.settings)
         self.mut_probability.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
         self.mut_probability.set_text_length_limit(5)
+        self.mut_probability.set_text(str(self.organism_config_dict["mutation_probability"]))
         self.mut_probability_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 80, cords[1] + 7.5, 160, 15),
                                                                  "Mutation probability", self.manager,
                                                                  container=self.settings)
@@ -214,6 +218,7 @@ class MainMenu(Scene):
                                                                          container=self.settings)
         self.budding_time_treshold.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
         self.budding_time_treshold.set_text_length_limit(5)
+        self.budding_time_treshold.set_text(str(self.organism_config_dict["time_threshold"]))
         self.budding_time_treshold_label = pygame_gui.elements.UILabel(
             pygame.Rect(cords[0] + 70, cords[1] + 7.5, 190, 15), "Budding time treshold", self.manager,
             container=self.settings)
@@ -223,6 +228,7 @@ class MainMenu(Scene):
                                                                        object_id='#float', container=self.settings)
         self.budding_probability.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
         self.budding_probability.set_text_length_limit(5)
+        self.budding_probability.set_text(str(self.organism_config_dict["budding_probability"]))
         self.budding_probability_label = pygame_gui.elements.UILabel(
             pygame.Rect(cords[0] + 80, cords[1] + 7.5, 160, 15), "Budding probability", self.manager,
             container=self.settings)
@@ -366,3 +372,41 @@ class MainMenu(Scene):
             config_dict["stationary_loss"] = self.stationary_energy_loss
 
             json.dump(config_dict, file)
+
+    def load_to_config(self):
+        with open("config/world-config.json", encoding="utf-8-sig") as file:
+            config_dict = json.load(file)
+
+            self.world_config_dict = config_dict
+
+            self.world_width = config_dict["world_width"]
+            self.world_height = config_dict["world_height"]
+            self.seed = random.randint(1,99999999999)
+
+        with open("config/plant-config.json", encoding="utf-8-sig") as file:
+            config_dict = json.load(file)
+
+            self.plant_config_dict = config_dict
+
+            self.plant_growth = config_dict["growth"]
+            self.plant_percentage = config_dict["plant_percentage"]
+            self.plant_energy = config_dict["energy"]
+
+        with open("config/organism-config.json", encoding="utf-8-sig") as file:
+            config_dict = json.load(file)
+
+            self.organism_config_dict = config_dict
+
+            self.initial_percentage_of_organisms = config_dict["organism_percentage"]
+            self.sight_distance = config_dict["sight_distance"]
+            self.speed = config_dict["speed"]
+            self.mut_probability = config_dict["mutation_probability"]
+            self.budding_energy_threshold = config_dict["energy_threshold"]
+            self.budding_time_threshold = config_dict["time_threshold"]
+            self.budding_probability = config_dict["budding_probability"]
+            self.initial_energy_capacity = config_dict["energy_capacity"]
+            # self.eating_threshold = config_dict["eating_threshold"]
+            self.budding_energy_loss = config_dict["budding_loss"]
+            self.walking_energy_loss = config_dict["walking_loss"]
+            self.stationary_energy_loss = config_dict["stationary_loss"]
+
