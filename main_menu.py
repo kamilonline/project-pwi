@@ -41,118 +41,250 @@ class MainMenu(Scene):
         self.manager)
 
     def create_settings_menu(self):
-        self.close_settings_button = pygame_gui.elements.UIButton(pygame.Rect(((pygame.display.get_window_size()[0]-165) / 2, (pygame.display.get_window_size()[1]-100)), (165, 50)),
-        'Close',
-        self.manager,
-        container = self.settings)
-
+        # todo: move settings elements to fill the fullscreen mode
+        self.close_settings_button = pygame_gui.elements.UIButton(
+            pygame.Rect(((pygame.display.get_window_size()[0] * 0.05), (pygame.display.get_window_size()[1] - 100)),
+                        (165, 50)),
+            'Close',
+            self.manager,
+            container=self.settings)
 
         world_width_cords = (pygame.display.get_window_size()[0] * 0.05, pygame.display.get_window_size()[1] * 0.05)
 
-        self.world_width = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(world_width_cords,(240, 25)),
-        50.0,
-        (0.0, 100.0),
-        self.manager,
-        container=self.settings)
+        self.world_width = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(world_width_cords, (240, 25)),
+                                                                  50.0,
+                                                                  (0.0, 100.0),
+                                                                  self.manager,
+                                                                  container=self.settings)
 
-        self.world_width_number = pygame_gui.elements.UILabel(pygame.Rect((world_width_cords[0] + 250, world_width_cords[1]), (27, 25)),
-        str(int(self.world_width.get_current_value())),
-        self.manager,
-        container=self.settings)
+        self.world_width_number = pygame_gui.elements.UILabel(
+            pygame.Rect((world_width_cords[0] + 250, world_width_cords[1]), (27, 25)),
+            str(int(self.world_width.get_current_value())),
+            self.manager,
+            container=self.settings)
 
-        self.world_width_label = pygame_gui.elements.UILabel(pygame.Rect(world_width_cords[0], world_width_cords[1] - 15,
-        240, 15),
-        "World width",
-        self.manager,
-        container=self.settings)
-
+        self.world_width_label = pygame_gui.elements.UILabel(
+            pygame.Rect(world_width_cords[0], world_width_cords[1] - 15,
+                        240, 15),
+            "World width",
+            self.manager,
+            container=self.settings)
 
         world_height_cords = (world_width_cords[0], world_width_cords[1] + 50)
 
-        self.world_height = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(world_height_cords,(240, 25)),
-        50.0,
-        (0.0, 100.0),
-        self.manager,
-        container=self.settings)
+        self.world_height = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(world_height_cords, (240, 25)),
+                                                                   50.0,
+                                                                   (0.0, 100.0),
+                                                                   self.manager,
+                                                                   container=self.settings)
 
-        self.world_height_number = pygame_gui.elements.UILabel(pygame.Rect((world_height_cords[0] + 250, world_height_cords[1]), (27, 25)),
-        str(int(self.world_height.get_current_value())),
-        self.manager,
-        container=self.settings)
+        self.world_height_number = pygame_gui.elements.UILabel(
+            pygame.Rect((world_height_cords[0] + 250, world_height_cords[1]), (27, 25)),
+            str(int(self.world_height.get_current_value())),
+            self.manager,
+            container=self.settings)
 
-        self.world_height_label = pygame_gui.elements.UILabel(pygame.Rect(world_height_cords[0], world_height_cords[1] - 15,
-        240, 15),
-        "World height",
-        self.manager,
-        container=self.settings)
-
+        self.world_height_label = pygame_gui.elements.UILabel(
+            pygame.Rect(world_height_cords[0], world_height_cords[1] - 15,
+                        240, 15),
+            "World height",
+            self.manager,
+            container=self.settings)
 
         world_border_cords = (world_width_cords[0], world_width_cords[1] + 100)
 
         self.world_border = pygame_gui.elements.UIButton(pygame.Rect(world_border_cords,
-        (60, 30)),
-        '',
-        self.manager,
-        container = self.settings)
+                                                                     (60, 30)),
+                                                         '',
+                                                         self.manager,
+                                                         container=self.settings)
 
-        self.world_border_label = pygame_gui.elements.UILabel(pygame.Rect(world_border_cords[0] + 70, world_border_cords[1] + 7.5,
-        110, 15),
-        "World border",
-        self.manager,
-        container=self.settings)
-
+        self.world_border_label = pygame_gui.elements.UILabel(
+            pygame.Rect(world_border_cords[0] + 70, world_border_cords[1] + 7.5,
+                        110, 15),
+            "World border",
+            self.manager,
+            container=self.settings)
 
         plant_percentage_cords = (world_border_cords[0], world_border_cords[1] + 100)
 
         self.plant_percentage = pygame_gui.elements.UITextEntryLine(pygame.Rect(plant_percentage_cords,
-        (60,100)),
-        self.manager,
-        container = self.settings,
-        object_id = '#float')
-        self.plant_percentage.set_allowed_characters(['0','1','2','3','4','5','6','7','8','9','.'])
+                                                                                (60, 100)),
+                                                                    self.manager,
+                                                                    container=self.settings,
+                                                                    object_id='#float')
+        self.plant_percentage.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
         self.plant_percentage.set_text_length_limit(5)
 
-        self.plant_percentage_label = pygame_gui.elements.UILabel(pygame.Rect(plant_percentage_cords[0] + 70, plant_percentage_cords[1] + 7.5,
-        130, 15),
-        "Plant percentage",
-        self.manager,
-        container=self.settings)
-
+        self.plant_percentage_label = pygame_gui.elements.UILabel(
+            pygame.Rect(plant_percentage_cords[0] + 70, plant_percentage_cords[1] + 7.5,
+                        130, 15),
+            "Plant percentage",
+            self.manager,
+            container=self.settings)
 
         plant_growth_cords = (plant_percentage_cords[0], plant_percentage_cords[1] + 30)
 
         self.plant_growth = pygame_gui.elements.UITextEntryLine(pygame.Rect(plant_growth_cords,
-        (60,100)),
-        self.manager,
-        container = self.settings,
-        object_id = '#int')
-        self.plant_growth.set_allowed_characters(['0','1','2','3','4','5','6','7','8','9'])
+                                                                            (60, 100)),
+                                                                self.manager,
+                                                                container=self.settings,
+                                                                object_id='#int')
+        self.plant_growth.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
 
-        self.plant_growth_label = pygame_gui.elements.UILabel(pygame.Rect(plant_growth_cords[0] + 70, plant_growth_cords[1] + 7.5,
-        170, 15),
-        "Plant growth (frames)",
-        self.manager,
-        container=self.settings)
-
+        self.plant_growth_label = pygame_gui.elements.UILabel(
+            pygame.Rect(plant_growth_cords[0] + 70, plant_growth_cords[1] + 7.5,
+                        170, 15),
+            "Plant growth (frames)",
+            self.manager,
+            container=self.settings)
 
         plant_energy_cords = (plant_growth_cords[0], plant_growth_cords[1] + 60)
 
-        self.plant_energy = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(plant_energy_cords,(240, 25)),
-        50.0,
-        (0.0, 255.0),
-        self.manager,
-        container=self.settings)
+        self.plant_energy = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(plant_energy_cords, (240, 25)),
+                                                                   50.0,
+                                                                   (0.0, 255.0),
+                                                                   self.manager,
+                                                                   container=self.settings)
 
-        self.plant_energy_number = pygame_gui.elements.UILabel(pygame.Rect((plant_energy_cords[0] + 250, plant_energy_cords[1]), (27, 25)),
-        str(int(self.world_height.get_current_value())),
-        self.manager,
-        container=self.settings)
+        self.plant_energy_number = pygame_gui.elements.UILabel(
+            pygame.Rect((plant_energy_cords[0] + 250, plant_energy_cords[1]), (27, 25)),
+            str(int(self.world_height.get_current_value())),
+            self.manager,
+            container=self.settings)
 
-        self.plant_energy_label = pygame_gui.elements.UILabel(pygame.Rect(plant_energy_cords[0], plant_energy_cords[1] - 15,
-        240, 15),
-        "Initial plant energy",
-        self.manager,
-        container=self.settings)
+        self.plant_energy_label = pygame_gui.elements.UILabel(
+            pygame.Rect(plant_energy_cords[0], plant_energy_cords[1] - 15,
+                        240, 15),
+            "Initial plant energy",
+            self.manager,
+            container=self.settings)
+
+        cords = (world_width_cords[0] + 400, world_width_cords[1])
+
+        self.initial_percentage_of_organisms = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords,
+                                                                                               (60, 100)), self.manager,
+                                                                                   object_id='#float',
+                                                                                   container=self.settings)
+        self.initial_percentage_of_organisms.set_allowed_characters(
+            ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
+        self.initial_percentage_of_organisms.set_text_length_limit(5)
+        self.initial_percentage_of_organisms_label = pygame_gui.elements.UILabel(
+            pygame.Rect(cords[0] + 70, cords[1] + 7.5, 270, 15), "Initial percentage of organisms", self.manager,
+            container=self.settings)
+
+        cords = (cords[0], cords[1] + 40)
+        self.sight_distance = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords, (60, 100)), self.manager,
+                                                                  object_id='#float', container=self.settings, )
+        self.sight_distance.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
+        self.sight_distance.set_text_length_limit(5)
+        self.sight_distance_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 60, cords[1] + 7.5, 150, 15),
+                                                                "Sight distance", self.manager, container=self.settings)
+
+        cords = (cords[0], cords[1] + 40)
+        self.speed = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords, (60, 100)), self.manager,
+                                                         object_id='#float', container=self.settings)
+        self.speed.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
+        self.speed.set_text_length_limit(5)
+        self.speed_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 60, cords[1] + 7.5, 80, 15), "Speed",
+                                                       self.manager, container=self.settings)
+
+        cords = (cords[0], cords[1] + 40)
+        self.mut_probability = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords, (60, 100)), self.manager,
+                                                                   object_id='#float', container=self.settings)
+        self.mut_probability.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
+        self.mut_probability.set_text_length_limit(5)
+        self.mut_probability_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 80, cords[1] + 7.5, 160, 15),
+                                                                 "Mutation probability", self.manager,
+                                                                 container=self.settings)
+
+        cords = (cords[0], cords[1] + 55)
+        self.budding_energy_treshold = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords, (240, 25)), 50.0,
+                                                                              (0.0, 255.0), self.manager,
+                                                                              container=self.settings)
+        self.budding_energy_treshold_number = pygame_gui.elements.UILabel(
+            pygame.Rect((cords[0] + 250, cords[1]), (27, 25)),
+            str(int(self.budding_energy_treshold.get_current_value())), self.manager, container=self.settings)
+        self.budding_energy_treshold_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15),
+                                                                         "Budding energy treshold", self.manager,
+                                                                         container=self.settings)
+
+        cords = (cords[0], cords[1] + 40)
+        self.budding_time_treshold = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords, (60, 100)), self.manager,
+                                                                         container=self.settings)
+        self.budding_time_treshold.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
+        self.budding_time_treshold.set_text_length_limit(5)
+        self.budding_time_treshold_label = pygame_gui.elements.UILabel(
+            pygame.Rect(cords[0] + 70, cords[1] + 7.5, 190, 15), "Budding time treshold", self.manager,
+            container=self.settings)
+
+        cords = (cords[0], cords[1] + 40)
+        self.budding_probability = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords, (60, 100)), self.manager,
+                                                                       object_id='#float', container=self.settings)
+        self.budding_probability.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
+        self.budding_probability.set_text_length_limit(5)
+        self.budding_probability_label = pygame_gui.elements.UILabel(
+            pygame.Rect(cords[0] + 80, cords[1] + 7.5, 160, 15), "Budding probability", self.manager,
+            container=self.settings)
+
+        cords = (cords[0], cords[1] + 70)
+        self.initial_energy_capacity = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords, (240, 25)), 50.0,
+                                                                              (0.0, 255.0), self.manager,
+                                                                              container=self.settings)
+        self.initial_energy_capacity_number = pygame_gui.elements.UILabel(
+            pygame.Rect((cords[0] + 250, cords[1]), (27, 25)),
+            str(int(self.initial_energy_capacity.get_current_value())), self.manager, container=self.settings)
+        self.initial_energy_capacity_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15),
+                                                                         "Initial energy capacity", self.manager,
+                                                                         container=self.settings)
+
+        cords = (cords[0], cords[1] + 50)
+        self.budding_energy_loss = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords, (240, 25)), 50.0,
+                                                                          (0.0, 255.0), self.manager,
+                                                                          container=self.settings)
+        self.budding_energy_loss_number = pygame_gui.elements.UILabel(pygame.Rect((cords[0] + 250, cords[1]), (27, 25)),
+                                                                      str(int(
+                                                                          self.budding_energy_loss.get_current_value())),
+                                                                      self.manager, container=self.settings)
+        self.budding_energy_loss_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15),
+                                                                     "Budding energy loss", self.manager,
+                                                                     container=self.settings)
+
+        cords = (cords[0], cords[1] + 50)
+        self.walking_energy_loss = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords, (240, 25)), 50.0,
+                                                                          (0.0, 255.0), self.manager,
+                                                                          container=self.settings)
+        self.walking_energy_loss_number = pygame_gui.elements.UILabel(pygame.Rect((cords[0] + 250, cords[1]), (27, 25)),
+                                                                      str(int(
+                                                                          self.walking_energy_loss.get_current_value())),
+                                                                      self.manager, container=self.settings)
+        self.walking_energy_loss_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15),
+                                                                     "Walking energy loss", self.manager,
+                                                                     container=self.settings)
+
+        cords = (cords[0], cords[1] + 50)
+        self.stationary_energy_loss = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords, (240, 25)), 50.0,
+                                                                             (0.0, 255.0), self.manager,
+                                                                             container=self.settings)
+        self.stationary_energy_loss_number = pygame_gui.elements.UILabel(
+            pygame.Rect((cords[0] + 250, cords[1]), (27, 25)),
+            str(int(self.stationary_energy_loss.get_current_value())), self.manager, container=self.settings)
+        self.stationary_energy_loss_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15),
+                                                                        "Stationary energy loss", self.manager,
+                                                                        container=self.settings)
+
+        cords = (cords[0], cords[1] + 50)
+        self.eating_energy_loss = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords, (240, 25)), 50.0,
+                                                                         (0.0, 255.0), self.manager,
+                                                                         container=self.settings)
+        self.eating_energy_loss_number = pygame_gui.elements.UILabel(pygame.Rect((cords[0] + 250, cords[1]), (27, 25)),
+                                                                     str(int(
+                                                                         self.eating_energy_loss.get_current_value())),
+                                                                     self.manager, container=self.settings)
+        self.eating_energy_loss_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15),
+                                                                    "Eating energy loss", self.manager,
+                                                                    container=self.settings)
+
 
     def update_sliders_text(self):
         if self.settings.visible:
