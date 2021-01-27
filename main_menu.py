@@ -48,6 +48,12 @@ class MainMenu(Scene):
             'Close',
             self.manager,
             container=self.settings)
+        self.save_settings_button = pygame_gui.elements.UIButton(
+            pygame.Rect(((pygame.display.get_window_size()[0] * 0.05 + 200), (pygame.display.get_window_size()[1] - 100)),
+                        (165, 50)),
+            'Save',
+            self.manager,
+            container=self.settings)
 
         world_width_cords = (pygame.display.get_window_size()[0] * 0.05, pygame.display.get_window_size()[1] * 0.05)
 
@@ -314,6 +320,9 @@ class MainMenu(Scene):
                         self.settings.hide()
                         self.settings.visible = False
 
+                    if event.ui_element == self.save_settings_button:
+                        self.dump_to_config()
+
 
                 if event.user_type == pygame_gui.UI_TEXT_ENTRY_CHANGED:
                     if event.ui_object_id == 'panel.#float':
@@ -323,3 +332,37 @@ class MainMenu(Scene):
                             if temp > 1: event.ui_element.set_text('1')
                         except:
                             event.ui_element.set_text('0')
+    def dump_to_config(self):
+        with open("config/world-config.json", encoding="utf-8-sig") as file:
+            config_dict = json.load(file)
+
+            config_dict["world_width"] = self.world_width
+            config_dict["world_height"] = self.world_height
+            config_dict["seed"] = self.seed
+            json.dump(config_dict, file)
+
+        with open("config/plant-config.json", encoding="utf-8-sig") as file:
+            config_dict = json.load(file)
+
+            config_dict["plant_percentage"] = self.plant_percentage
+            config_dict["growth"] = self.plant_growth
+            config_dict["energy"] = self.plant_energy
+            json.dump(config_dict, file)
+
+        with open("config/organism-config.json", encoding="utf-8-sig") as file:
+            config_dict = json.load(file)
+
+            config_dict["organism_percentage"] = self.initial_percentage_of_organisms
+            config_dict["sight_distance"] = self.sight_distance
+            config_dict["speed"] = self.speed
+            config_dict["mutation_probability"] = self.mut_probability
+            config_dict["energy_threshold"] = self.budding_energy_treshold
+            config_dict["time_threshold"] = self.budding_time_treshold
+            config_dict["budding_probability"] = self.budding_probability
+            config_dict["energy_capacity"] = self.initial_energy_capacity
+            # config_dict["eating_threshold"] =
+            config_dict["budding_loss"] = self.budding_energy_loss
+            config_dict["walking_loss"] = self.walking_energy_loss
+            config_dict["stationary_loss"] = self.stationary_energy_loss
+
+            json.dump(config_dict, file)
