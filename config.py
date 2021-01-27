@@ -30,7 +30,7 @@ class OrganismConfig:
             self.mutation_probability = config_dict["mutation_probability"]
             self.budding_energy_threshold = config_dict["energy_threshold"]
             self.budding_time_threshold = config_dict["time_threshold"]
-            self.budding_probability = config_dict["probability"]
+            self.budding_probability = config_dict["budding_probability"]
             self.energy_capacity = config_dict["energy_capacity"]
             self.eating_threshold = config_dict["eating_threshold"]
             self.budding_loss = config_dict["budding_loss"]
