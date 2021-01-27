@@ -10,6 +10,5 @@
     "eating_threshold": 0.2,
     "budding_loss": 20,
     "walking_loss": 10,
-    "stationary_loss": 2,
-    "eating_loss": 0
+    "stationary_loss": 2
 }

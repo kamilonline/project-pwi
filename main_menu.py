@@ -263,16 +263,6 @@ class MainMenu(Scene):
                                                                         container=self.settings)
 
         cords = (cords[0], cords[1] + 50)
-        self.eating_energy_loss = pygame_gui.elements.UIHorizontalSlider(pygame.Rect(cords, (240, 25)), 50.0,
-                                                                         (0.0, 255.0), self.manager,
-                                                                         container=self.settings)
-        self.eating_energy_loss_number = pygame_gui.elements.UILabel(pygame.Rect((cords[0] + 250, cords[1]), (27, 25)),
-                                                                     str(int(
-                                                                         self.eating_energy_loss.get_current_value())),
-                                                                     self.manager, container=self.settings)
-        self.eating_energy_loss_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0], cords[1] - 15, 240, 15),
-                                                                    "Eating energy loss", self.manager,
-                                                                    container=self.settings)
 
 
     def update_sliders_text(self):
@@ -294,8 +284,7 @@ class MainMenu(Scene):
                 str(int(self.walking_energy_loss.get_current_value())))
             if self.stationary_energy_loss.has_moved_recently: self.stationary_energy_loss_number.set_text(
                 str(int(self.stationary_energy_loss.get_current_value())))
-            if self.eating_energy_loss.has_moved_recently: self.eating_energy_loss_number.set_text(
-                str(int(self.eating_energy_loss.get_current_value())))
+
     def process_events(self, events):
         for event in events:
 

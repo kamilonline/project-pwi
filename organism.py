@@ -14,7 +14,6 @@ class Organism(Entity):
     budding_loss = 0
     walking_loss = 0
     stationary_loss = 0
-    eating_loss = 0
 
     def __init__(self, *args):
         if len(args) == 1:
@@ -43,7 +42,6 @@ class Organism(Entity):
         cls.budding_loss = organism_config.budding_loss
         cls.walking_loss = organism_config.walking_loss
         cls.stationary_loss = organism_config.stationary_loss
-        cls.eating_loss = organism_config.eating_loss
 
     def reproduce(self, organisms: dict):
         """
@@ -130,6 +128,7 @@ class Organism(Entity):
                 if seen_field:
                     for element in seen_field:
                         if isinstance(element, Plant):
+                            # todo: add detection of smaller organisms
 
                             # looking for a nearest plant
                             distance = self.__check_distance(field_x, field_y)

@@ -36,4 +36,3 @@ class OrganismConfig:
             self.budding_loss = config_dict["budding_loss"]
             self.walking_loss = config_dict["walking_loss"]
             self.stationary_loss = config_dict["stationary_loss"]
-            self.eating_loss = config_dict["eating_loss"]
