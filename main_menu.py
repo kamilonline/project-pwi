@@ -1,5 +1,5 @@
 from simulation import *
-
+import json
 
 class MainMenu(Scene):
     def __init__(self):
@@ -91,11 +91,16 @@ class MainMenu(Scene):
             self.manager,
             container=self.settings)
 
-        world_border_cords = (world_width_cords[0], world_width_cords[1] + 100)
+        world_seed_cords = (world_width_cords[0], world_width_cords[1] + 100)
 
-        # todo: move elements to fill empty space left after deleting world border check box
+        self.seed = pygame_gui.elements.UITextEntryLine(pygame.Rect(world_seed_cords, (100, 100)), self.manager,
+                                                         object_id='#int', container=self.settings)
+        self.seed.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
+        self.seed.set_text_length_limit(11)
+        self.seed_label = pygame_gui.elements.UILabel(pygame.Rect(world_seed_cords[0] + 100, world_seed_cords[1] + 7.5, 80, 15), "Seed",
+                                                       self.manager, container=self.settings)
 
-        plant_percentage_cords = (world_border_cords[0], world_border_cords[1] + 100)
+        plant_percentage_cords = (world_seed_cords[0], world_seed_cords[1] + 100)
 
         self.plant_percentage = pygame_gui.elements.UITextEntryLine(pygame.Rect(plant_percentage_cords,
                                                                                 (60, 100)),
