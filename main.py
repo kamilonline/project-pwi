@@ -2,11 +2,17 @@ from main_menu import *
 from simulation import *
 
 class App:
-
     window = None
     clock = None
     active_scene = Scene()
     config = dict()
+
+    def __init__(self):
+        self.config = self.load_config()
+        self.is_running = True
+        self.init_pygame()
+        self.change_scene(self.config["default scene"])
+        self.main_loop()
 
     def init_pygame(self):
         pygame.init()
