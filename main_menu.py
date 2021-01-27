@@ -164,16 +164,16 @@ class MainMenu(Scene):
 
         cords = (cords[0], cords[1] + 40)
         self.sight_distance = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords, (60, 100)), self.manager,
-                                                                  object_id='#float', container=self.settings, )
-        self.sight_distance.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
+                                                                  object_id='#int', container=self.settings, )
+        self.sight_distance.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
         self.sight_distance.set_text_length_limit(5)
         self.sight_distance_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 60, cords[1] + 7.5, 150, 15),
                                                                 "Sight distance", self.manager, container=self.settings)
 
         cords = (cords[0], cords[1] + 40)
         self.speed = pygame_gui.elements.UITextEntryLine(pygame.Rect(cords, (60, 100)), self.manager,
-                                                         object_id='#float', container=self.settings)
-        self.speed.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.'])
+                                                         object_id='#int', container=self.settings)
+        self.speed.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
         self.speed.set_text_length_limit(5)
         self.speed_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 60, cords[1] + 7.5, 80, 15), "Speed",
                                                        self.manager, container=self.settings)
