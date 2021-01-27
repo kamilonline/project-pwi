@@ -5,7 +5,7 @@
     "mutation_probability": 0.05,
     "energy_threshold": 100,
     "time_threshold": 100,
-    "probability": 0.2,
+    "budding_probability": 0.2,
     "energy_capacity": 100,
     "eating_threshold": 0.2,
     "budding_loss": 20,
