@@ -5,9 +5,10 @@ class Entity:
         self.coords = coords
 
     def destroy(self, entities, fields):
+        # assigning None because destroy is called during iteration
         entities[self.generation][self.id] = None
 
         i = self.coords[0]
         j = self.coords[1]
-        index = fields[i][j].index(self)
-        fields[i][j][index] = None
+        if self in fields[i][j]:
+            fields[i][j].remove(self)

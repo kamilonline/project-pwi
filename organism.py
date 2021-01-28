@@ -31,7 +31,8 @@ class Organism(Entity):
 
         self.energy = self.energy_capacity
         self.orientation = Direction(random.choice([i.value for i in Direction]))
-
+        self.budding_frame_count = 0
+        self.speed_frame_count = 0
     @classmethod
     def initialize_class_atributes(cls, organism_config: OrganismConfig):
         cls.mutation_probability = organism_config.mutation_probability
@@ -43,18 +44,22 @@ class Organism(Entity):
         cls.walking_loss = organism_config.walking_loss
         cls.stationary_loss = organism_config.stationary_loss
 
-    def reproduce(self, organisms: dict):
+    def reproduce(self, organisms: dict, fields):
         """
         creates copy of organism and mutates it according to parameters
         :return: instance of Organism class
         """
-
         self.energy -= Organism.budding_loss
         if self.energy < 0:
             self.energy = 0
             return
+        parent = self
+        self.budding_frame_count = 0
 
-        attributes = vars(self).copy()
+        attributes = vars(parent).copy()
+        new_coords = parent.coords.copy()
+        attributes["coords"] = new_coords
+        attributes = attributes.copy()
         attributes["generation"] += 1
         new_generation = attributes["generation"]
 
@@ -63,14 +68,14 @@ class Organism(Entity):
             attributes["id"] = list(organisms[new_generation].keys())[-1] + 1
         else:
             attributes["id"] = 0
-            if new_generation not in organisms:
+            if new_generation not in list(organisms.keys()):
                 organisms[new_generation] = {}
-
         if random.random() < Organism.mutation_probability:
             # create new mutated atributes
             attributes = list(self.__mutate_attributes(attributes).values())
-
         new_organism = Organism(attributes)
+        fields[new_organism.coords[0]][new_organism.coords[1]].append(new_organism)
+        organisms[new_organism.generation][new_organism.id] = new_organism
 
         return new_organism
 
@@ -109,7 +114,7 @@ class Organism(Entity):
 
     def search_fields(self, fields):
         minimum_distance = self.sight_distance
-        min_coords = ()
+        min_coords = (0,0)
         world_height = len(fields)
         world_width = len(fields[0])
 
@@ -137,19 +142,69 @@ class Organism(Entity):
                                 min_coords = (field_x, field_y)
         return Direction.generate_direction(self.coords, min_coords)
 
-    def move(self, direction: Direction, world_height: int, world_width: int):
-        self.energy -= Organism.walking_loss
-        if self.energy < 0:
-            self.energy = 0
-            return
+    def move(self, direction: Direction, world_height: int, world_width: int, fields):
 
+        if self.energy - Organism.walking_loss < 0:
+            return
+        self.energy -= Organism.walking_loss
+
+        if self in fields[self.coords[0]][self.coords[1]]:
+            fields[self.coords[0]][self.coords[1]].remove(self)
+        else:
+            return
         self.coords[0] = max(0, min(world_height, self.coords[0] + direction.value[0]))
 
         self.coords[1] = max(0, min(world_width, self.coords[1] + direction.value[1]))
 
+        fields[self.coords[0]][self.coords[1]].append(self)
+
     def eat(self, element):
         self.energy += element.energy
-        self.energy -= Organism.eating_loss
-        if self.energy < 0:
-            self.energy = 0
+
+    def __str__(self):
+        result = f'g: {self.generation} id: {self.id} coords: {self.coords} sight: {self.sight_distance} speed {self.speed} cap: {self.energy_capacity} E: {self.energy}'
+        return result
+
+    def update(self, time_delta, organisms, plants, fields):
+        self.energy -= self.stationary_loss
+        if self.energy <= 0:
+            self.destroy(organisms, fields)
+            return
+
+        direction = self.search_fields(fields)
+        # eating
+        if direction.name == "here":
+            if self.energy < self.energy_capacity:
+                for entity in fields[self.coords[0]][self.coords[1]]:
+                    # check if is able to eat
+                    if isinstance(entity, Plant):
+                        self.eat(entity)
+                        entity.destroy(plants, fields)
+                    elif isinstance(entity, Organism) and entity.energy_capacity <= self.energy_capacity * self.eating_threshold:
+                        self.eat(entity)
+                        entity.destroy(organisms, fields)
+        # reproduction
+        if self.energy > self.budding_energy_threshold:
+            self.budding_frame_count += 1
+            if self.budding_frame_count >= self.budding_time_threshold:
+
+                if random.random() < self.budding_probability:
+                    self.reproduce(organisms, fields)
+
+        else:
+            self.budding_frame_count = 0
+
+        if self.energy == 0:
+            self.destroy(organisms, fields)
+            return
+
+        if direction.name != "here":
+            self.speed_frame_count += 1
+            if self.speed_frame_count >= int(1/self.speed):
+                self.move(direction, len(fields), len(fields[0]), fields)
+                self.speed_frame_count = 0
+
+        if self.energy == 0:
+            self.destroy(organisms, fields)
+            return
 
