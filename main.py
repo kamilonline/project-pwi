@@ -35,13 +35,16 @@ class App:
             elif event.type == pygame.USEREVENT:
                 if event.user_type == CHANGE_SCENE_EVENT:
                     self.change_scene(event.scene)
+                elif event.user_type == EXIT_SIMULATION_EVENT:
+                    self.change_scene(MainMenu)
+                elif event.user_type == EXIT_APP_EVENT:
+                    self.is_running = False
         return events
 
     def main_loop(self):
 
         while self.is_running:
             time_delta = self.clock.tick(self.config["fps"]) / 1000.0
-
             self.window.fill((0, 0, 0))
             self.active_scene.process_frame(time_delta, self.process_events())
             pygame.display.update()

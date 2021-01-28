@@ -1,6 +1,8 @@
 from enum import Enum
 import pygame
 CHANGE_SCENE_EVENT = pygame.event.custom_type()
+EXIT_SIMULATION_EVENT = pygame.event.custom_type()
+EXIT_APP_EVENT = pygame.event.custom_type()
 
 
 class Scene:
