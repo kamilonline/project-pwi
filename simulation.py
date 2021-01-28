@@ -118,9 +118,9 @@ class Simulation(Scene):
         organisms_list = [i for i in self.world.shuffle_organisms() if i is not None]
 
 
-        average_sight_distance = sum([i.sight_distance for i in organisms_list]) / len(organisms_list)
-        average_speed = sum([i.speed for i in organisms_list]) / len(organisms_list)
-        average_energy_capacity = sum([i.energy_capacity for i in organisms_list]) /len(organisms_list)
+        average_sight_distance = sum([i.sight_distance for i in organisms_list]) / max(1, len(organisms_list))
+        average_speed = sum([i.speed for i in organisms_list]) / max(1, len(organisms_list))
+        average_energy_capacity = sum([i.energy_capacity for i in organisms_list]) / max(1, len(organisms_list))
 
         lines = ["average",
                  str(round(average_sight_distance, 2)) + " sight distance",
