@@ -58,3 +58,26 @@ class World:
 
             self.fields[coords_iter[0]][coords_iter[1]].append(organism)
             self.organisms[generation][id] = organism
+
+    def shuffle_organisms(self):
+        result = []
+        for generation in self.organisms.values():
+            for organism in generation.values():
+                result.append(organism)
+        random.shuffle(result)
+        return result
+
+    def update(self, time_delta):
+        randomized_organism_list = self.shuffle_organisms()
+        if not randomized_organism_list:
+            return 0
+        Plant.frame_count += 1
+        if Plant.frame_count >= Plant.growth:
+            coords = [(i, j) for i in range(self.height) for j in range(self.width)]
+            Plant.frame_count = 0
+            new_plant = Plant.grow(self.plants, random.choice(coords))
+            self.fields[new_plant.coords[0]][new_plant.coords[1]].append(new_plant)
+        for organism in randomized_organism_list:
+
+            if organism is not None:
+                organism.update(time_delta, self.organisms, self.plants, self.fields)
