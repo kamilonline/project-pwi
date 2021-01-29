@@ -375,7 +375,7 @@ class MainMenu(Scene):
     def dump_to_config(self):
 
         with open("config/world-config.json", "w") as file:
-            # print(self.world_config_dict)
+
             self.world_config_dict["world_width"] = self.convert_sprites_to_values(self.world_width)
             self.world_config_dict["world_height"] = self.convert_sprites_to_values(self.world_height)
             self.world_config_dict["seed"] = self.convert_sprites_to_values(self.seed)
@@ -387,7 +387,6 @@ class MainMenu(Scene):
             self.plant_config_dict["plant_percentage"] = self.convert_sprites_to_values(self.plant_percentage)
             self.plant_config_dict["growth"] = self.convert_sprites_to_values(self.plant_growth)
             self.plant_config_dict["energy"] = self.convert_sprites_to_values(self.plant_energy)
-            print(self.plant_config_dict)
 
             json.dump(self.plant_config_dict, file, indent=4)
 
@@ -405,8 +404,7 @@ class MainMenu(Scene):
             self.organism_config_dict["budding_loss"] = self.convert_sprites_to_values(self.budding_energy_loss)
             self.organism_config_dict["walking_loss"] = self.convert_sprites_to_values(self.walking_energy_loss)
             self.organism_config_dict["stationary_loss"] = self.convert_sprites_to_values(self.stationary_energy_loss)
-            self.budding_energy_threshold = 2
-            print(self.organism_config_dict)
+            self.organism_config_dict['energy_threshold'] = self.convert_sprites_to_values(self.budding_energy_treshold)
 
             json.dump(self.organism_config_dict, file, indent=4)
 
