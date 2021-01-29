@@ -132,10 +132,9 @@ class Organism(Entity):
                 seen_field = fields[field_x][field_y]
                 if seen_field:
                     for element in seen_field:
-                        if isinstance(element, Plant):
-                            # todo: add detection of smaller organisms
+                        if isinstance(element, Plant) or (isinstance(element, Organism) and element.energy_capacity <= Organism.eating_threshold*self.energy_capacity):
 
-                            # looking for a nearest plant
+                            # looking for a nearest edible element
                             distance = self.__check_distance(field_x, field_y)
                             if distance < minimum_distance:
                                 minimum_distance = distance
