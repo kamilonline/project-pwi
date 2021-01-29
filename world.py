@@ -14,6 +14,9 @@ class World:
         # {generation index : {id: entitiy instance}}
         self.plants = {0: {}}
         self.organisms = {0: {}}
+        self.generation_colors = {0: (random.randint(128, 255),
+                                      random.randint(128, 255),
+                                      random.randint(128, 255))}
 
         # list of all possible coords
         coords = [(i, j) for i in range(self.height) for j in range(self.width)]
@@ -59,6 +62,13 @@ class World:
             self.fields[coords_iter[0]][coords_iter[1]].append(organism)
             self.organisms[generation][id] = organism
 
+    def update_generation_colors(self):
+        for generation in self.organisms.keys():
+            if generation not in list(self.generation_colors.keys()):
+                self.generation_colors[generation] = (random.randint(128, 255),
+                                                      random.randint(128, 255),
+                                                      random.randint(128, 255))
+
     def shuffle_organisms(self):
         result = []
         for generation in self.organisms.values():
@@ -81,3 +91,4 @@ class World:
 
             if organism is not None:
                 organism.update(time_delta, self.organisms, self.plants, self.fields)
+        self.update_generation_colors()

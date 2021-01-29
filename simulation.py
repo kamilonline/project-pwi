@@ -18,7 +18,7 @@ class Simulation(Scene):
         self.simulation_surface = pygame.Surface((self.world.width * self.simulation_field_size,
                                                   self.world.height * self.simulation_field_size))
 
-        self.exit_button = pygame_gui.elements.UIButton(pygame.Rect((int((pygame.display.get_window_size()[0] - 150) / 2),
+        self.exit_button = pygame_gui.elements.UIButton(pygame.Rect((int((pygame.display.get_window_size()[0] - 250)),
                                                                       int((pygame.display.get_window_size()[1] - 120))),
                                                                      (150, 50)),
                                                          'Exit',
@@ -81,7 +81,7 @@ class Simulation(Scene):
             raise Exception("invalid entity instance, unable to draw")
 
     def draw_organism(self, entity):
-        color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+        color = self.world.generation_colors[entity.generation]
         organism_coords = Vector2(entity.coords[1], entity.coords[0])
         position = organism_coords * self.simulation_field_size + Vector2(self.simulation_field_size, self.simulation_field_size) / 2.0
         pygame.draw.circle(self.simulation_surface, color, tuple(position), self.simulation_field_size / 2.0)
@@ -104,19 +104,18 @@ class Simulation(Scene):
         self.draw_entities()
 
     def get_generation_data(self):
-        text_color = (124, 185, 232)
+        #text_color = (124, 185, 232)
         font = pygame.font.Font(None, 60)
         generations_count = [len([j for j in list(i.values()) if j is not None]) for i in list(self.world.organisms.values())]
 
         generations_data = [(index, str(i)) for index, i in enumerate(generations_count) if i > 0]
-        lines = [font.render(str(line[0]) + ": " + line[1], True, text_color)for line in generations_data]
+        lines = [font.render(str(line[0]) + ": " + line[1], True, self.world.generation_colors[line[0]])for line in generations_data]
         return lines
 
     def get_traits_data(self):
         text_color = (124, 185, 232)
         font = pygame.font.Font(None, 60)
         organisms_list = [i for i in self.world.shuffle_organisms() if i is not None]
-
 
         average_sight_distance = sum([i.sight_distance for i in organisms_list]) / max(1, len(organisms_list))
         average_speed = sum([i.speed for i in organisms_list]) / max(1, len(organisms_list))
