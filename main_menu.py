@@ -114,6 +114,12 @@ class MainMenu(Scene):
         self.seed.set_text(str(self.world_config_dict["seed"]))
         self.seed_label = pygame_gui.elements.UILabel(pygame.Rect(world_seed_cords[0] + 105, world_seed_cords[1] + 7.5, 80, 15), "Seed",
                                                        self.manager, container=self.settings)
+        self.randomize_seed_settings_button = pygame_gui.elements.UIButton(
+            pygame.Rect(((world_seed_cords[0] + 190), (world_seed_cords[1])),
+                        (120, 30)),
+            'Randomize',
+            self.manager,
+            container=self.settings)
 
         plant_percentage_cords = (world_seed_cords[0], world_seed_cords[1] + 100)
 
@@ -346,6 +352,10 @@ class MainMenu(Scene):
                     if event.ui_element == self.save_settings_button:
                         self.dump_to_config()
 
+                    if event.ui_element == self.randomize_seed_settings_button:
+                        if isinstance(self.seed, pygame_gui.elements.ui_text_entry_line.UITextEntryLine):
+                            self.seed.set_text(str(random.randint(1, 99999)))
+
 
                 if event.user_type == pygame_gui.UI_TEXT_ENTRY_CHANGED:
                     if event.ui_object_id == 'panel.#float':
@@ -401,8 +411,7 @@ class MainMenu(Scene):
 
             self.world_width = config_dict["world_width"]
             self.world_height = config_dict["world_height"]
-            self.seed = random.randint(1, 99999)
-            self.world_config_dict["seed"] = self.seed
+            self.seed = self.world_config_dict["seed"]
 
         with open("config/plant-config.json") as file:
             config_dict = json.load(file)
@@ -442,28 +451,3 @@ class MainMenu(Scene):
             elif "." not in object.allowed_characters:
 
                 return int(object.get_text())
-        # print(type(self.world_width))
-        # print(type(self.seed))
-        # print(type(self.speed))
-        # self.world_width = int(self.world_width.get_current_value())
-        # self.world_height = int(self.world_height.get_current_value())
-        # self.seed = int(self.seed.get_text())
-        #
-        # self.plant_growth = int(self.plant_growth.get_text())
-        # self.plant_percentage = float(self.plant_percentage.get_text())
-        # self.plant_energy = int(self.plant_energy.get_current_value())
-        #
-        #
-        # self.initial_percentage_of_organisms = float(self.initial_percentage_of_organisms.get_text())
-        # self.sight_distance = int(self.sight_distance.get_text())
-        # self.speed = float(self.speed.get_text())
-        # self.mut_probability = float(self.mut_probability.get_text())
-        # #self.budding_energy_threshold = int(self.budding_energy_threshold.get_current_value())
-        # #self.budding_time_threshold = int(self.budding_time_threshold.get_current_value())
-        # self.budding_probability = float(self.budding_probability.get_text())
-        # self.initial_energy_capacity = int(self.initial_energy_capacity.get_current_value())
-        # # self.eating_threshold = config_dict["eating_threshold"]
-        # self.budding_energy_loss = int(self.budding_energy_loss.get_current_value())
-        # self.walking_energy_loss = int(self.walking_energy_loss.get_current_value())
-        # self.stationary_energy_loss = int(self.stationary_energy_loss.get_current_value())
-        # print(vars(self))
