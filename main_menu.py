@@ -292,7 +292,14 @@ class MainMenu(Scene):
                                                                         "Stationary energy loss", self.manager,
                                                                         container=self.settings)
 
-        cords = (cords[0], cords[1] + 50)
+        cords = (cords[0], cords[1] + 40)
+        self.eating_threshold= pygame_gui.elements.UITextEntryLine(pygame.Rect(cords, (60, 100)), self.manager,
+                                                         object_id='#float', container=self.settings)
+        self.eating_threshold.set_allowed_characters(['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'])
+        self.eating_threshold.set_text_length_limit(5)
+        self.eating_threshold.set_text(str(self.organism_config_dict["eating_threshold"]))
+        self.eating_threshold_label = pygame_gui.elements.UILabel(pygame.Rect(cords[0] + 70, cords[1] + 7.5, 160, 15), "Eating threshold",
+                                                       self.manager, container=self.settings)
 
 
     def update_sliders_text(self):
