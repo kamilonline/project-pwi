@@ -400,11 +400,10 @@ class MainMenu(Scene):
             self.organism_config_dict["time_threshold"] = self.convert_sprites_to_values(self.budding_time_treshold)
             self.organism_config_dict["budding_probability"] = self.convert_sprites_to_values(self.budding_probability)
             self.organism_config_dict["energy_capacity"] = self.convert_sprites_to_values(self.initial_energy_capacity)
-            # config_dict["eating_threshold"] =
+            self.organism_config_dict["eating_threshold"] = self.convert_sprites_to_values(self.eating_threshold)
             self.organism_config_dict["budding_loss"] = self.convert_sprites_to_values(self.budding_energy_loss)
             self.organism_config_dict["walking_loss"] = self.convert_sprites_to_values(self.walking_energy_loss)
             self.organism_config_dict["stationary_loss"] = self.convert_sprites_to_values(self.stationary_energy_loss)
-            self.organism_config_dict['energy_threshold'] = self.convert_sprites_to_values(self.budding_energy_treshold)
 
             json.dump(self.organism_config_dict, file, indent=4)
 
@@ -440,7 +439,7 @@ class MainMenu(Scene):
             self.budding_time_threshold = config_dict["time_threshold"]
             self.budding_probability = config_dict["budding_probability"]
             self.initial_energy_capacity = config_dict["energy_capacity"]
-            # self.eating_threshold = config_dict["eating_threshold"]
+            self.eating_threshold = config_dict["eating_threshold"]
             self.budding_energy_loss = config_dict["budding_loss"]
             self.walking_energy_loss = config_dict["walking_loss"]
             self.stationary_energy_loss = config_dict["stationary_loss"]
