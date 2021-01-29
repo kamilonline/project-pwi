@@ -1,4 +1,5 @@
 from enum import Enum
+import random
 from math_util import *
 
 
@@ -11,6 +12,9 @@ class Direction(Enum):
 
     @staticmethod
     def generate_direction(organism_coords, target_coords):
+        if target_coords is None:
+            direction = random.choice([i.value for i in Direction])
+            return Direction(direction)
         x_distance = abs(organism_coords[0] - target_coords[0])
         y_distance = abs(organism_coords[1] - target_coords[1])
         result = [sign(target_coords[0] - organism_coords[0]), sign(target_coords[1] - organism_coords[1])]
