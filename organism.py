@@ -114,7 +114,7 @@ class Organism(Entity):
 
     def search_fields(self, fields):
         minimum_distance = self.sight_distance
-        min_coords = (0,0)
+        min_coords = None
         world_height = len(fields)
         world_width = len(fields[0])
 
@@ -151,9 +151,9 @@ class Organism(Entity):
             fields[self.coords[0]][self.coords[1]].remove(self)
         else:
             return
-        self.coords[0] = max(0, min(world_height, self.coords[0] + direction.value[0]))
+        self.coords[0] = max(0, min(world_height-1, self.coords[0] + direction.value[0]))
 
-        self.coords[1] = max(0, min(world_width, self.coords[1] + direction.value[1]))
+        self.coords[1] = max(0, min(world_width-1, self.coords[1] + direction.value[1]))
 
         fields[self.coords[0]][self.coords[1]].append(self)
 
