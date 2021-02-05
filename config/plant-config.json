@@ -1,5 +1,5 @@
 {
-    "plant_percentage": 0,
-	"growth": 30,
-	"energy": 20
+    "plant_percentage": 0.0,
+    "growth": 30,
+    "energy": 20
 }

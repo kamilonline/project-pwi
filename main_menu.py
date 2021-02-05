@@ -434,7 +434,7 @@ class MainMenu(Scene):
             json.dump(self.organism_config_dict, file, indent=4)
 
     def load_from_config(self):
-        with open("config/world-config.json",) as file:
+        with open("config/world-config.json") as file:
             config_dict = json.load(file)
 
             self.world_config_dict = config_dict
