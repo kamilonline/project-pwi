@@ -1,6 +1,7 @@
 from main_menu import *
 from simulation import *
 
+
 class App:
     window = None
     clock = None
