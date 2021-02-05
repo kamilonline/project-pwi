@@ -1,14 +1,14 @@
 {
-    "organism_percentage": 0.2,
-    "sight_distance": 10,
-    "speed": 0.1,
-    "mutation_probability": 0.05,
-    "energy_threshold": 100,
+    "organism_percentage": 0.103,
+    "sight_distance": 20,
+    "speed": 0.104885,
+    "mutation_probability": 0.098,
+    "energy_threshold": 150,
     "time_threshold": 100,
-    "budding_probability": 0.2,
-    "energy_capacity": 100,
-    "eating_threshold": 0.2,
+    "budding_probability": 0.103,
+    "energy_capacity": 98,
+    "eating_threshold": 0.0,
     "budding_loss": 20,
-    "walking_loss": 10,
-    "stationary_loss": 95
+    "walking_loss": 3,
+    "stationary_loss": 1
 }
